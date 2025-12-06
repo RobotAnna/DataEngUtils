@@ -1,0 +1,46 @@
+export no_proxy=$no_proxy,s3.eu-west-1.amazonaws.com
+
+---------------------------------------------------------------------------------------------------
+
+Single local file:
+cp - copy object -- includes options dryrun and recursive
+mv - move object
+rm - remove object -- includes options dryrun and recursive
+
+Directory:
+sync - sync directories and s3 prefixes -- probably useful for test environment initialization
+mb - make bucket
+rb - remove an empty bucket
+ls - list objects
+
+---------------------------------------------------------------------------------------------------
+
+-- check contents of bucket
+
+aws s3 ls s3://<bucket_name>/datalake/snapshot/mngr_sch_sch_schades/year=2023/month=1/
+PRE day=1/
+PRE day=2/
+PRE day=3/
+PRE day=4/
+PRE day=5/
+PRE day=6/
+
+
+aws s3 ls s3://<bucket_name>/
+aws s3 ls s3://<bucket_name>/datalake/snapshot/ --recursive
+aws s3 ls s3://<bucket_name>/datalake/migration/ --recursive
+aws s3 ls s3://<bucket_name>/datalake/snapshot/mngr_rel_rel_relaties/year=2022/
+
+---------------------------------------------------------------------------------------------------
+
+-- copy parquet file to working directory
+
+sudo aws s3
+cp s3://<bucket_name>/datalake/snapshot/mngr_rel_rel_courtage_uitkeringen/year=2022/month=8/day=11/part-00000-145c2bc8-fbf8-4dbf-8b7e-8becff365143.c000.snappy.parquet .
+
+---------------------------------------------------------------------------------------------------
+
+-- recursive remove objects, that meet search criteria
+
+aws s3 rm <path> --recursive --dryrun --include <criteria> --exclude <criteria>
+aws s3 rm s3://<bucket_name>/datalake/snapshot/ --recursive --include "*year=2022*"

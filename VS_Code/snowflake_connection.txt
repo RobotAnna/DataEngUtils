@@ -1,0 +1,5 @@
+[NSONTWIKKEL]
+account = "nsontwikkel.west-europe.azure"
+user = nerrida.dempster@nslogin.nl
+authenticator = "externalbrowser"
+password = ""
